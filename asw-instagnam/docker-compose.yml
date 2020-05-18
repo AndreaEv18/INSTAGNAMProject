@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+    mysql-database:
+        image: mysql:5.5
+        environment:
+            MYSQL_DATABASE: "db"
+            MYSQL_USER: "user"
+            MYSQL_PASSWORD: "password"
+            MYSQL_ROOT_PASSWORD: "rootpassword"
+        networks:
+            - asw-net
+    consul:
+        image: consul:latest
+        networks:
+            - asw-net
+    ricette:
+        build:
+            context: ./
+            dockerfile: Dockerfile_ricette
+        ports:
+            - "9000:9000"
+        networks:
+            - asw-net
+        depends_on:
+            - mysql-database
+
+networks:
+    asw-net:
+        driver: bridge

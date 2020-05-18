@@ -1,0 +1,7 @@
+FROM openjdk:8-jdk 
+
+ADD ricette/build/libs/*.jar ricette.jar
+
+EXPOSE 9000
+
+ENTRYPOINT ["java", "-jar", "ricette.jar"]
