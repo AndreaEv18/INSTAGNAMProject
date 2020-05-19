@@ -45,7 +45,7 @@ services:
         networks:
             - asw-net
         depends_on:
-            - mysql-database
+            - ricette-mysql
             - consul
     ricette-seguite:
         build:
@@ -54,7 +54,7 @@ services:
         networks:
             - asw-net
         depends_on:
-            - mysql-database
+            - ricette-seguite-mysql
             - consul
     connessioni:
         build:
@@ -63,7 +63,7 @@ services:
         networks:
             - asw-net
         depends_on:
-            - mysql-database
+            - connessioni-mysql
             - consul
     consul:
         image: consul:latest
