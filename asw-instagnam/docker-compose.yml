@@ -35,7 +35,7 @@ services:
         ports:
             - "8080:8080"
         networks:
-            - asw-netw
+            - asw-net
         depends_on:
             - consul
     ricette:
