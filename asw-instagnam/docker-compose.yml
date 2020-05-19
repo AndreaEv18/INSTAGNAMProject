@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-    mysql-database:
-        image: mysql:5.5
+    ricette-mysql:
+        image: mysql:5.7
         environment:
             MYSQL_DATABASE: "db"
             MYSQL_USER: "user"
@@ -10,20 +10,65 @@ services:
             MYSQL_ROOT_PASSWORD: "rootpassword"
         networks:
             - asw-net
-    consul:
-        image: consul:latest
+    ricette-seguite-mysql:
+        image: mysql:5.7
+        environment:
+            MYSQL_DATABASE: "db"
+            MYSQL_USER: "user"
+            MYSQL_PASSWORD: "password"
+            MYSQL_ROOT_PASSWORD: "rootpassword"
         networks:
             - asw-net
+    connessioni-mysql:
+        image: mysql:5.7
+        environment:
+            MYSQL_DATABASE: "db"
+            MYSQL_USER: "user"
+            MYSQL_PASSWORD: "password"
+            MYSQL_ROOT_PASSWORD: "rootpassword"
+        networks:
+            - asw-net
+    api-gateway:
+        build:
+            context: ./
+            dockerfile: Dockerfile_api-gateway
+        ports:
+            - "8080:8080"
+        networks:
+            - asw-netw
+        depends_on:
+            - consul
     ricette:
         build:
             context: ./
             dockerfile: Dockerfile_ricette
-        ports:
-            - "9000:9000"
         networks:
             - asw-net
         depends_on:
             - mysql-database
+            - consul
+    ricette-seguite:
+        build:
+            context: ./
+            dockerfile: Dockerfile_ricette-seguite
+        networks:
+            - asw-net
+        depends_on:
+            - mysql-database
+            - consul
+    connessioni:
+        build:
+            context: ./
+            dockerfile: Dockerfile_connessioni
+        networks:
+            - asw-net
+        depends_on:
+            - mysql-database
+            - consul
+    consul:
+        image: consul:latest
+        networks:
+            - asw-net
 
 networks:
     asw-net:
