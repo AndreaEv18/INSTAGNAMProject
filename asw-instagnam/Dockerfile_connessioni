@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk 
 
-ADD conessioni/build/libs/*.jar app.jar
+ADD connessioni/build/libs/*.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
