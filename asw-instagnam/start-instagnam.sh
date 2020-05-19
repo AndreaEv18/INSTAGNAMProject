@@ -1,3 +1,3 @@
 #!/bin/bash
 gradle build &&
-docker-compose up -d
+docker-compose up
