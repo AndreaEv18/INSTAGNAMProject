@@ -1,7 +1,6 @@
 package asw.instagnam.connessioni.rest;
 
 import asw.instagnam.connessioni.domain.*;
-import asw.kafka.connessioniproducer.domain.ConnessioniProducerRunner;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +22,7 @@ import java.util.*;
 public class ConnessioniController {
 
 	@Autowired 
-	private ConnessioniService connessioniService;
-	
-	/*@Autowired
-	private ConnessioniProducerRunner connessioniProducerRunner;
-	*/
+	private ConnessioniService connessioniService; 
 
 	private final Logger logger = Logger.getLogger(ConnessioniController.class.toString()); 
 
@@ -39,7 +34,6 @@ public class ConnessioniController {
 		String followed = request.getFollowed();
 		logger.info("REST CALL: createConnessione " + follower + ", " + followed); 
 		Connessione connessione = connessioniService.createConnessione(follower, followed);
-		//connessioniProducerRunner.run(follewe);
 		return connessione; 
 	}	
 

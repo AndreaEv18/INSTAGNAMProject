@@ -8,15 +8,23 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.logging.Logger; 
 import java.util.*; 
 
+import asw.instagnam.ricette.eventpublisher.DomainEvent;
+import asw.instagnam.ricette.eventpublisher.RicettaCreatedEvent;
+
 @Service
 public class RicetteService {
 
 	@Autowired
 	private RicetteRepository ricetteRepository;
 
+	@Autowired
+	private RicettaCreatedEventPublisher eventPublisher;
+
  	public RicettaCompleta createRicetta(String autore, String titolo, String preparazione) {
 		RicettaCompleta ricetta = new RicettaCompleta(autore, titolo, preparazione); 
 		ricetta = ricetteRepository.save(ricetta);
+		DomainEvent ricettaCreatedEvent = new RicettaCreatedEvent(ricetta.getId(), ricetta.getTitolo(), ricetta.getAutore());
+		eventPublisher.publish(ricettaCreatedEvent);
 		return ricetta;
 	}
 
