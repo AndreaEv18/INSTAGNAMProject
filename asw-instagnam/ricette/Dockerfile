@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk 
 
-ADD ricette/build/libs/*.jar app.jar
+ADD build/libs/*.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
