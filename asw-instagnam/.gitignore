@@ -1,0 +1,5 @@
+.gradle
+ricette/build
+ricette-seguite/build
+connessioni/build
+api-gateway/build
