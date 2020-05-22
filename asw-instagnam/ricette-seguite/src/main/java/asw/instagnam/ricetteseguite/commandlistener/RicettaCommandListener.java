@@ -3,10 +3,11 @@ package asw.instagnam.ricetteseguite.commandlistener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.stereotype.Component;
+import org.springframework.messaging.handler.annotation.Payload;
 
 import asw.instagnam.ricetteseguite.domain.CommandHandler;
+import asw.instagnam.common.api.command.Command;
 
 @Component
 public class RicettaCommandListener {
@@ -15,7 +16,7 @@ public class RicettaCommandListener {
 	private CommandHandler commandHandler;
 
 	@KafkaListener(topics = "${asw.kafka.channel.ricette.in}", groupId = "${asw.kafka.groupid}")
-	public void onCommand(ConsumerRecord<String, CreateRicettaCommand> record) throws Exception {
-		commandHandler.onCommand(record.value());
+	public void listen(@Payload Command command) {
+		commandHandler.onCommand(command);
 	}
 }

@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import asw.instagnam.ricetteseguite.commandlistener.Command;
+import asw.instagnam.common.api.command.Command;
 
 @Service
 public class CommandHandler {

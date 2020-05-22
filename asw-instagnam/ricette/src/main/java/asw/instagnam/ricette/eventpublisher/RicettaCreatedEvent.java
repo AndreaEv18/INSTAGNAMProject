@@ -1,18 +1,18 @@
 package asw.instagnam.ricette.eventpublisher;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter @Setter
+import asw.instagnam.common.api.event.DomainEvent;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RicettaCreatedEvent implements DomainEvent {
 
 	private Long id;
 	private String titolo;
 	private String autore;
-
-	public RicettaCreatedEvent(Long id, String titolo, String autore) {
-		this.id = id;
-		this.titolo = titolo;
-		this.autore = autore;
-	}
 	
 }

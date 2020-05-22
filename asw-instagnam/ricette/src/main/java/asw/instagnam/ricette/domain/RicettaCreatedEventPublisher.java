@@ -1,6 +1,6 @@
 package asw.instagnam.ricette.domain;
 
-import asw.instagnam.ricette.eventpublisher.DomainEvent;
+import asw.instagnam.common.api.event.DomainEvent;
 
 public interface RicettaCreatedEventPublisher {
 

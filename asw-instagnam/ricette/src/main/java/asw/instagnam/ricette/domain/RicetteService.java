@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.logging.Logger; 
 import java.util.*; 
 
-import asw.instagnam.ricette.eventpublisher.DomainEvent;
 import asw.instagnam.ricette.eventpublisher.RicettaCreatedEvent;
+import asw.instagnam.common.api.event.DomainEvent;
 
 @Service
 public class RicetteService {
