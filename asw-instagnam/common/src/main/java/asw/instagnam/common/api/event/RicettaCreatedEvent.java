@@ -1,10 +1,8 @@
-package asw.instagnam.ricette.eventpublisher;
+package asw.instagnam.common.api.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import asw.instagnam.common.api.event.DomainEvent;
 
 @Data
 @NoArgsConstructor

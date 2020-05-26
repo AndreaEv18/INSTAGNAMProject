@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.logging.Logger; 
-import java.util.*; 
+import java.util.*;
 
-import asw.instagnam.ricette.eventpublisher.RicettaCreatedEvent;
 import asw.instagnam.common.api.event.DomainEvent;
+import asw.instagnam.common.api.event.RicettaCreatedEvent;
 
 @Service
 public class RicetteService {
