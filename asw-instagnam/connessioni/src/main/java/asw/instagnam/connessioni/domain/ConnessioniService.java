@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.logging.Logger; 
-import java.util.*; 
+import java.util.*;
+
+import asw.instagnam.common.api.event.DomainEvent;
+import asw.instagnam.common.api.event.ConnessioneCreatedEvent; 
 
 @Service
 public class ConnessioniService {
@@ -14,9 +17,14 @@ public class ConnessioniService {
 	@Autowired
 	private ConnessioniRepository connessioniRepository;
 
+	@Autowired
+	private ConnessioneCreatedEventPublisher eventPublisher;
+
  	public Connessione createConnessione(String follower, String followed) {
 		Connessione connessione = new Connessione(follower, followed); 
 		connessione = connessioniRepository.save(connessione);
+		DomainEvent connessioneCreatedEvent = new ConnessioneCreatedEvent(connessione.getFollower(), connessione.getFollowed());
+		eventPublisher.publish(connessioneCreatedEvent);
 		return connessione;
 	}
 

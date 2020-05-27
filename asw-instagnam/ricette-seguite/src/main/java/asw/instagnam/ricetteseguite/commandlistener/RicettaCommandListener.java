@@ -19,8 +19,6 @@ public class RicettaCommandListener {
 
 	@KafkaListener(topics = "${asw.kafka.channel.ricette.in}", groupId = "${asw.kafka.groupid}")
 	public void listen(ConsumerRecord<String, DomainEvent> record) {
-		
 		commandHandler.onEvent(record.value());
-		System.out.println("CIAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + record.value().toString());
 	}
 }
