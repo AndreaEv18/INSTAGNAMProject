@@ -14,7 +14,7 @@ public class ConnessioniService {
 	@Autowired
 	private RicetteSeguiteService ricetteSeguiteService;
 
-	public Connessione add(final Connessione connessione) {
+	public Connessione add(Connessione connessione) {
 		connessione = connessioneRepository.save(connessione);
 		ricetteSeguiteService.updateRicetteSeguite(connessione);
 		return connessione;

@@ -14,7 +14,7 @@ public class RicetteService {
 	@Autowired
 	private RicetteSeguiteService ricetteSeguiteService;
 
-	public Ricetta add(final Ricetta ricetta) {
+	public Ricetta add(Ricetta ricetta) {
 		ricetta = ricettaRepository.save(ricetta);
 		ricetteSeguiteService.updateRicetteSeguite(ricetta);
 		return ricetta;
@@ -23,6 +23,6 @@ public class RicetteService {
 	public Collection<Ricetta> getByAutore(String autore) {
 		return ricettaRepository.findAllByAutore(autore);
 	}
-	
+
 }
  

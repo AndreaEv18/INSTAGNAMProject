@@ -39,7 +39,7 @@ public class RicetteSeguiteService {
 
 	/* Trova le ricette (in formato breve) degli utenti seguiti da utente. */ 
 	public Collection<Ricetta> getRicetteSeguite(String utente) {
-		return ricetteSeguiteRepository.findByFollower(utente);
+		return ricetteSeguiteRepository.findByFollower(utente).getRicetteSeguite();
 	}
 	
 }
