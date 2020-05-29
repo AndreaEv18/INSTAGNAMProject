@@ -16,7 +16,7 @@ public class EventHandler {
 	private RicetteService ricetteService;
 
 	@Autowired
-	private ConnesioniService connessioniService;
+	private ConnessioniService connessioniService;
 
 	public void onEvent(DomainEvent event) {
 		if(event.getClass().equals(RicettaCreatedEvent.class)) {
