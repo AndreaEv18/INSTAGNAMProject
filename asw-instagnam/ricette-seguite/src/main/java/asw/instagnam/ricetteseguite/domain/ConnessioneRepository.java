@@ -6,6 +6,6 @@ import java.util.*;
 
 public interface ConnessioneRepository extends CrudRepository<Connessione, Long> {
 
-	public Collection<Connesione> findByFollowed(String followed);
+	public Collection<Connessione> findByFollowed(String followed);
 
 }
