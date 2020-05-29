@@ -1,6 +1,6 @@
 package asw.instagnam.ricetteseguite.domain;
 
-import lombok.*; 
+import lombok.*;
 
 import javax.persistence.*; 
 
@@ -12,6 +12,6 @@ public class Connessione {
 	@GeneratedValue
 	private Long id; 
 	private String follower; 
-	private String followed; 
+	private String followed;
 	
 }

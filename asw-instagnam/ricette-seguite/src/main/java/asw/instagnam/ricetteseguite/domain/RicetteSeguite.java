@@ -16,10 +16,10 @@ public class RicetteSeguite {
 	@GeneratedValue
 	private Long id;
 	private String follower;
-	
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="ricetta_id")
+
 	@Singular
+	@OneToMany
+	@JoinColumn(name="id", referencedColumnName="id", insertable=false, updatable=false)
 	private List<Ricetta> ricetteSeguite;
 
 }

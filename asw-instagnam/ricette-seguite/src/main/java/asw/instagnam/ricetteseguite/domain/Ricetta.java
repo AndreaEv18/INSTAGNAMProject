@@ -1,6 +1,8 @@
 package asw.instagnam.ricetteseguite.domain;
 
-import lombok.*; 
+import lombok.*;
+
+import java.util.List; 
 
 import javax.persistence.*; 
 
@@ -12,6 +14,11 @@ public class Ricetta {
 	@Id 
 	private Long id; 
 	private String autore; 
-	private String titolo; 
-	
+	private String titolo;
+
+	@Singular
+	@OneToMany 
+	@JoinColumn(name="id", referencedColumnName="id")
+	private List<RicetteSeguite> ricetteSeguite;
+
 }

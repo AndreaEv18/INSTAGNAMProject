@@ -12,6 +12,12 @@ public class EventHandler {
 
 	private final Logger logger = Logger.getLogger(EventHandler.class.toString());
 
+	@Autowired
+	private RicetteService ricetteService;
+
+	@Autowired
+	private ConnesioniService connessioniService;
+
 	public void onEvent(DomainEvent event) {
 		if(event.getClass().equals(RicettaCreatedEvent.class)) {
 			RicettaCreatedEvent rce = (RicettaCreatedEvent) event;
@@ -30,7 +36,7 @@ public class EventHandler {
 		ricetta.setAutore(event.getAutore());
 		ricetta.setTitolo(event.getTitolo());
 
-		//TODO
+		ricetteService.add(ricetta);
 	}
 
 	private void connessioneCreated(ConnessioneCreatedEvent event) {
@@ -38,7 +44,7 @@ public class EventHandler {
 		connessione.setFollower(event.getFollower());
 		connessione.setFollowed(event.getFollowed());
 
-		//TODO
+		connessioniService.add(connessione);
 	}
 
 }
