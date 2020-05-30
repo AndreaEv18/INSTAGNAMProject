@@ -18,28 +18,37 @@ public class RicetteSeguiteService {
 	private ConnessioniService connessioniService;
 
 	public void updateRicetteSeguite(Ricetta ricetta) {
+		RicetteSeguite rs;
 		for(Connessione c : connessioniService.getByFollowed(ricetta.getAutore())) {
-			RicetteSeguite rs = ricetteSeguiteRepository.findByFollower(c.getFollower());
-			if(rs != null) {
-				rs.getRicetteSeguite().add(ricetta);
-				ricetteSeguiteRepository.save(rs);
-			} else
-				System.out.println("NULL!!!!");
+			rs = new RicetteSeguite();
+
+			rs.setFollower(c.getFollower());
+			rs.setIdRicetta(ricetta.getId());
+			rs.setAutoreRicetta(ricetta.getAutore());
+			rs.setTitoloRicetta(ricetta.getTitolo());
+
+			ricetteSeguiteRepository.save(rs);
 		}
 	}
 
 	public void updateRicetteSeguite(Connessione connessione) {
-		RicetteSeguite rs = ricetteSeguiteRepository.findByFollower(connessione.getFollower());
-		if(rs != null) {
-			rs.getRicetteSeguite().addAll(ricetteService.getByAutore(connessione.getFollowed()));
+		RicetteSeguite rs;
+		for(Ricetta r : ricetteService.getByAutore(connessione.getFollowed())) {
+			rs = new RicetteSeguite();
+
+			rs.setFollower(connessione.getFollower());
+			rs.setIdRicetta(r.getId());
+			rs.setAutoreRicetta(r.getAutore());
+			rs.setTitoloRicetta(r.getTitolo());
+
 			ricetteSeguiteRepository.save(rs);
-		} else
-			System.out.println("NULL!!!!");
+		}
 	}
 
 	/* Trova le ricette (in formato breve) degli utenti seguiti da utente. */ 
-	public Collection<Ricetta> getRicetteSeguite(String utente) {
-		return ricetteSeguiteRepository.findByFollower(utente).getRicetteSeguite();
+	public Collection<RicetteSeguite> getRicetteSeguite(String utente) {
+		Collection<RicetteSeguite> ricetteSeguite = ricetteSeguiteRepository.findAllByFollower(utente);
+		return ricetteSeguite;
 	}
 	
 }
