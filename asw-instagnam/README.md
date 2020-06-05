@@ -14,7 +14,7 @@ Di seguito una breve descrizione delle modifiche apportate al progetto assegnato
   * Ogni volta che il servizio ricette‐seguite riceve un evento ConnessioneCreatedEvent, aggiorna di conseguenza la propria tabella delle connessioni e la tabella ricetteseguite.
   * Il servizio ricette‐seguite infine risponde alle richieste GET /ricetteseguite/{utente} consultando solo la propria tabella ricetteseguite.
   * Inoltre all'avvio, si creano e vengono mandate in esecuzione più istanze di ciascun servizio e, per evitare copie dovute all'inizializzazione dei databases,
-    abbiamo rimosso tale operazione iniziale.
+    abbiamo rimosso gli init da ricette e connessioni.
 
 * Inoltre abbiamo utilizzato le seguenti tecnologie:
 
@@ -74,15 +74,12 @@ per trovare le ricette seguite dall'utente U, è basata su invocazioni remote RE
 
 ## Esecuzione 
 
-Per eseguire questo progetto: 
+Per eseguire questo progetto:  
 
-* avviare *Consul* eseguendo lo script `start-consul.sh` 
+* per avviare l'applicazione *Instagnam*, eseguire lo script `start-instagnam.sh` con il comando `sudo`
 
-* per avviare l'applicazione *Instagnam*, eseguire lo script `run-instagnam.sh` 
+Alla fine, l'applicazione può essere arrestata usando lo script `stop-instagnam.sh` (sempre da usare con il comando `sudo`). 
 
-Alla fine, l'applicazione può essere arrestata usando lo script `stop-java-processes.sh` (**da usare con cautela!**). 
-
-Inoltre, *Consul* può essere arrestato con lo script `stop-consul.sh`. 
 
 
 ## Descrizione delle attività da svolgere 
