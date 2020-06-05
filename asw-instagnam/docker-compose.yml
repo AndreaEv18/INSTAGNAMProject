@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+
     ricette-mysql:
         image: mysql:5.7
         environment:
@@ -29,7 +30,8 @@ services:
         networks:
             - asw-net
             
-            
+    
+             
     api-gateway:
         build:
             context: ./api-gateway

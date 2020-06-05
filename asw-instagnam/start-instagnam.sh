@@ -5,4 +5,4 @@ if [ "$USER" != "root" ]; then
 fi
 
 gradle build &&
-docker-compose up -d
+docker-compose up -d --scale ricette=2 --scale ricette-seguite=2 --scale connessioni=2
