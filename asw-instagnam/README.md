@@ -2,6 +2,33 @@
 
 Progetto del corso di Analisi e progettazione del software per l'anno accademico 2019-2020. 
 
+## Descrizione modifiche apportate
+
+Di seguito una breve descrizione delle modifiche apportate al progetto assegnato:
+
+* Nei servizi ricette e connessioni, abbiamo usato una base di dati MySQL al posto di HSQLDB (eseguita in un contenitore Docker separato).
+  * Successivamente abbiamo invertito il servizio ricette-seguite nel modo seguente:
+
+  * Il servizio ricette‐seguite gestisce una propria base di dati (separata dalle precedenti, in un contenitore Docker separato), con una tabella per le ricette, una per le connessioni, e una  tabella ricetteseguite che memorizza righe (utenteFollower, idRicetta, autoreRicetta, titoloRicetta).
+  * Ogni volta che il servizio ricette‐seguite riceve un evento RicettaCreatedEvent, aggiorna di conseguenza la propria tabella delle ricette e la tabella ricetteseguite.
+  * Ogni volta che il servizio ricette‐seguite riceve un evento ConnessioneCreatedEvent, aggiorna di conseguenza la propria tabella delle connessioni e la tabella ricetteseguite.
+  * Il servizio ricette‐seguite infine risponde alle richieste GET /ricetteseguite/{utente} consultando solo la propria tabella ricetteseguite.
+  * Inoltre all'avvio, si creano e vengono mandate in esecuzione più istanze di ciascun servizio e, per evitare copie dovute all'inizializzazione dei databases,
+    abbiamo rimosso tale operazione iniziale.
+
+* Inoltre abbiamo utilizzato le seguenti tecnologie:
+
+  * -Docker per gestione contenitori
+  * -MySql come dbms
+  * -Kafka come message broker
+  * -Docker Compose per definire e avviare i vari contenitori docker.
+
+
+* Il tutto è stato progettato dal gruppo composto da:
+  * Andrea Giaccone
+  * Andrea Marrocco
+  * Marco De Giovanni
+
 
 ## Descrizione di questo progetto 
 
