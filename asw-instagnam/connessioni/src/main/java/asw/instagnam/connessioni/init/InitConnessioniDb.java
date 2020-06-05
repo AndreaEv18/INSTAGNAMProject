@@ -13,13 +13,16 @@ public class InitConnessioniDb implements CommandLineRunner {
 	@Autowired 
 	private ConnessioniService connessioniService; 
 
-	public void run(String[] args) {		
+	
+	public void run(String[] args) {	
+	/*	
 		connessioniService.createConnessione( "Cristiano", "Gennaro" );	
 		connessioniService.createConnessione( "Gennaro", "Cristiano" );	
 		connessioniService.createConnessione( "Paolo", "Cristiano" );	
 		connessioniService.createConnessione( "Paolo", "Gennaro" );	
 		connessioniService.createConnessione( "Anna", "Antonino" );	
 		connessioniService.createConnessione( "Anna", "Benedetta" );	
+	*/
 	}
-	
+
 }
