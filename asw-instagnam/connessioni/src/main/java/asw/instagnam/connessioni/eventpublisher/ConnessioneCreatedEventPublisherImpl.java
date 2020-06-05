@@ -1,4 +1,4 @@
-package asw.instagnam.connessione.eventpublisher;
+package asw.instagnam.connessioni.eventpublisher;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;

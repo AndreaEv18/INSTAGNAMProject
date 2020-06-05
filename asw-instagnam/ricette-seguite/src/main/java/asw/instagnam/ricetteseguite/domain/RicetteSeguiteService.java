@@ -8,22 +8,47 @@ import java.util.*;
 @Service 
 public class RicetteSeguiteService {
 
-	@Autowired 
-	private ConnessioniService connessioniService;
+	@Autowired
+	private RicetteSeguiteRepository ricetteSeguiteRepository;
 
-	@Autowired 
+	@Autowired
 	private RicetteService ricetteService;
 
-	/* Trova le ricette (in formato breve) degli utenti seguiti da utente. */ 
-	public Collection<Ricetta> getRicetteSeguite(String utente) {
-		Collection<Ricetta> ricette = new ArrayList<>(); 
-		Collection<Connessione> connessioni = connessioniService.getConnessioniByFollower(utente); 
-		for (Connessione connessione : connessioni) {
-			String followed = connessione.getFollowed();
-			Collection<Ricetta> ricetteByFollowed = ricetteService.getRicetteByAutore(followed);
-			ricette.addAll(ricetteByFollowed);
+	@Autowired
+	private ConnessioniService connessioniService;
+
+	public void updateRicetteSeguite(Ricetta ricetta) {
+		RicetteSeguite rs;
+		for(Connessione c : connessioniService.getByFollowed(ricetta.getAutore())) {
+			rs = new RicetteSeguite();
+
+			rs.setFollower(c.getFollower());
+			rs.setIdRicetta(ricetta.getId());
+			rs.setAutoreRicetta(ricetta.getAutore());
+			rs.setTitoloRicetta(ricetta.getTitolo());
+
+			ricetteSeguiteRepository.save(rs);
 		}
-		return ricette; 
+	}
+
+	public void updateRicetteSeguite(Connessione connessione) {
+		RicetteSeguite rs;
+		for(Ricetta r : ricetteService.getByAutore(connessione.getFollowed())) {
+			rs = new RicetteSeguite();
+
+			rs.setFollower(connessione.getFollower());
+			rs.setIdRicetta(r.getId());
+			rs.setAutoreRicetta(r.getAutore());
+			rs.setTitoloRicetta(r.getTitolo());
+
+			ricetteSeguiteRepository.save(rs);
+		}
+	}
+
+	/* Trova le ricette (in formato breve) degli utenti seguiti da utente. */ 
+	public Collection<RicetteSeguite> getRicetteSeguite(String utente) {
+		Collection<RicetteSeguite> ricetteSeguite = ricetteSeguiteRepository.findAllByFollower(utente);
+		return ricetteSeguite;
 	}
 	
 }

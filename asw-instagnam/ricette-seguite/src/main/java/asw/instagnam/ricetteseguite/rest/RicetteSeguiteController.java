@@ -14,7 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.logging.Logger; 
-import java.util.*; 
+import java.util.*;
+import java.util.stream.*; 
 
 @RestController
 public class RicetteSeguiteController {
@@ -26,11 +27,21 @@ public class RicetteSeguiteController {
 
 	/* Trova le ricette (in formato breve) degli utenti seguiti da utente. */ 
 	@GetMapping("/ricetteseguite/{utente}")
-	public Collection<Ricetta> getRicetteSeguite(@PathVariable String utente) {
+	public Collection<RicettaSeguitaBreve> getRicetteSeguite(@PathVariable String utente) {
 		logger.info("REST CALL: getRicetteSeguite " + utente); 
-		Collection<Ricetta> ricette = ricetteSeguiteService.getRicetteSeguite(utente); 
+		Collection<RicetteSeguite> ricette = ricetteSeguiteService.getRicetteSeguite(utente); 
 		logger.info("getRicetteSeguite(): " + ricette);
-		return ricette; 
+		return toRicetteSeguiteBrevi(ricette);
+	}
+
+	/*Converte una collezione di ricette seguite completa in una collezione di ricette seguite breve*/
+	private Collection<RicettaSeguitaBreve> toRicetteSeguiteBrevi(Collection<RicetteSeguite> ricetteSeguiteComplete) {
+		Collection<RicettaSeguitaBreve> ricette = 
+			ricetteSeguiteComplete
+				.stream()
+				.map(r -> new RicettaSeguitaBreve(r))
+				.collect(Collectors.toList());
+		return ricette;
 	}
 	
 }

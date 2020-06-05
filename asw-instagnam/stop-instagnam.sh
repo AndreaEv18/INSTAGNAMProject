@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ "$USER" != "root" ]; then
+    echo "E' necessario essere l'utente root per eseguire questo script"
+    exit 1
+fi
+
 docker-compose down &&
 docker image rm asw-instagnam_ricette
 docker image rm asw-instagnam_ricette-seguite
